@@ -93,7 +93,6 @@ namespace OOPDrawNew
                 }
             }
         }
-
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             switch (Mode)
