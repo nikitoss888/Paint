@@ -12,7 +12,6 @@ namespace ShapesLibrary
         }
         public Line(int x1, int y1, int x2, int y2, Pen pen) : base(x1, y1, pen)
         {
-
             X2 = x2;
             Y2 = y2;
         }

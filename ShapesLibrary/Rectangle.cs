@@ -13,6 +13,19 @@ namespace ShapesLibrary
         }
         public Rectangle(int x1, int y1, int x2, int y2, Pen pen) : base(x1, y1, x2, y2, pen)
         {
+            if (x2 < X1)
+            {
+                int temporary = X1;
+                X1 = x2;
+                X2 = temporary;
+            }
+            if (y2 < Y1)
+            {
+                int temporary = Y1;
+                Y1 = y2;
+                Y2 = temporary;
+            }
+
             Width = Math.Abs(X1 - X2);
             Height = Math.Abs(Y1 - Y2);
         }

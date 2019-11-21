@@ -16,7 +16,7 @@ namespace OOPDrawNew
         protected List<Shape> Shapes = new List<Shape>();
         protected Pen Pen;
         protected Mode Mode;
-        protected int MouseX, MouseY;
+        protected int MouseX, MouseY, MouseX2, MouseY2;
         protected Graphics graphics;
         public Form1()
         {
@@ -133,6 +133,36 @@ namespace OOPDrawNew
                 listBoxShapes.SetSelected(0, true);
             }
         }
+
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                pictureBox.Refresh();
+                switch (Mode)
+                {
+                    case Mode.DrawPoint:
+                        break;
+                    case Mode.DrawLine:
+                        graphics.DrawLine(Pen = new Pen(buttonColor.BackColor, 2), MouseX, MouseY, e.X, e.Y);
+                        break;
+                    case Mode.DrawEllipse:
+                        int Radius = Math.Abs(e.X - MouseX) * 2;
+                        int Radius2 = Math.Abs(e.Y - MouseY) * 2;
+                        graphics.DrawEllipse(Pen = new Pen(buttonColor.BackColor, 2),
+                            MouseX - Radius / 2, MouseY - Radius2 / 2, Radius, Radius2);
+                        break;
+                    case Mode.DrawCircle:
+                        Radius = (int)Math.Sqrt(Math.Pow(e.X - MouseX, 2) + Math.Pow(e.Y - MouseY, 2)) * 2;
+                        graphics.DrawEllipse(Pen = new Pen(buttonColor.BackColor, 2), 
+                            MouseX - Radius / 2, MouseY - Radius / 2, Radius, Radius);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             for(int i = 0; i < Shapes.Count; i++)
